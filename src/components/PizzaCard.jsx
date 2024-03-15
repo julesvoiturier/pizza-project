@@ -21,7 +21,7 @@ const PizzaCard = (props) => {
     }
 
     return (
-        <div className={`${openCart == true ? `pointer-events-none opacity-50` : ``} w-[30%] transition-all aspect-square bg-[#2d100b85] rounded-md overflow-hidden hover:translate-y-[-1%] group`}>
+        <div className={`${openCart == true ? `pointer-events-none opacity-50` : ``} w-[30%] transition-all aspect-square bg-[#2d100b3c] hover:bg-[#2d100bb8] rounded-md overflow-hidden hover:translate-y-[-1%] group`}>
             <div className='h-full'>
                 <div className='bg-[#2d100b] transition-all h-[20%] px-6 flex justify-between items-center group-hover:bg-[#ff6146]'>
                     <div className='text-white text-[18px] font-bold'>{props.pizzaName}</div>

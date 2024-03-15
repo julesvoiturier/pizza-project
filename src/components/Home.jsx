@@ -30,7 +30,11 @@ const Home = () => {
 
     return (
         <div onClick={()=> openCart == true ? dispatch(cartToggle()) : ""} className={`${openCart == true ? `brightness-[30%]` : `brightness-[100%]`} transition-all w-full flex flex-col justify-center items-center py-[70px] bg-[#eeebeb]`}>
-            <div></div>
+            <div className='flex flex-col items-center py-8 px-16 rounded-full mt-[100px] border-[1px] border-[#0000001c] relative group transition-all hover:rotate-[2deg]'>
+                <span className='text-left text-[20px] px-4 py-2 rounded-md absolute top-[-20px] left-[-20px] transition-all rotate-[-10deg] group-hover:rotate-[-15deg] flex justify-start font-bold bg-yellow-300 w-fit'>The orignial</span>
+                <div className='text-[50px] font-bold leading-none'>Pizza di Mama</div>
+            </div>
+            
             <div className='w-[65.5%]'>
                 <Filter/>
             </div>

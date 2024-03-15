@@ -21,13 +21,11 @@ const DIY = () => {
     const [customPrice, setCustomPrice] = useState(4)
     const [diyPizzaName, setDiyPizzaName] = useState("")
     const [validDiy, setValidDiy] = useState(true)
-
-    const  logTest = () => {
-        console.log(selectedIngredients);
-        console.log(customPrice);
-    }
+    const [activeSelect, setActiveSelect] = useState(false)
+    const [correctName, setCorrectName] = useState(true)
 
     const resetCustom = () => {
+        setActiveSelect(false)
         setSelectedIngredients([])
         setCustomPrice(4)
         setDiyPizzaName("")
@@ -35,19 +33,24 @@ const DIY = () => {
 
     const inputRef = useRef(null)
     const sendCustomPizza = () => {
+        console.log(selectedIngredients);
         if (diyPizzaName != "") {
             setValidDiy(true)
             inputRef.current.value = ""
             if (cart.length == 0) {
                 if (selectedIngredients.length == 0) {
-                    dispatch(addToCart({pizzaName: diyPizzaName, quantity: 1, ingredients: ["Dough only"], price: customPrice}))
+                    dispatch(addToCart({pizzaName: `${diyPizzaName} (Custom)`, quantity: 1, ingredients: ["Dough only"], price: customPrice}))
+                    resetCustom()
                 } else {
-                    dispatch(addToCart({pizzaName: diyPizzaName, quantity: 1, ingredients: selectedIngredients, price: customPrice}))
+                    cart.map((element, key)=>  {
+                        console.log(cart.element);
+                        if (element.pizzaName == diyPizzaName) {
+                            setCorrectName(false)
+                        }
+                    })
+                    dispatch(addToCart({pizzaName: `${diyPizzaName} (Custom)`, quantity: 1, ingredients: selectedIngredients, price: customPrice}))
+                    resetCustom()
                 }
-            } else {
-                cart.map((element, key)=> {
-                    element.pizzaName == diyPizzaName ? null : dispatch(addToCart({pizzaName: diyPizzaName, quantity: 1, ingredients: selectedIngredients, price: customPrice}))
-                })
             }
         } else {
             setValidDiy(false)
@@ -71,6 +74,8 @@ const DIY = () => {
                             ingredients={selectedIngredients} 
                             setPrice={setCustomPrice}
                             price={customPrice}
+                            active={activeSelect}
+                            setActive={setActiveSelect}
                             />
                         )
                     })
@@ -78,12 +83,11 @@ const DIY = () => {
             </div>
             <div className='flex gap-5'>
                 <input ref={inputRef} onChange={(e)=> setDiyPizzaName(e.target.value)} 
-                className={`${validDiy == true ? '' : 'border-2 border-[#ff6146] animate-[pulse_0.2s_ease-in-out_2] '} px-4 rounded-md outline-[#3f10082e] w-[300px]`} type="text" placeholder="Name your pizza" />
+                className={`${validDiy == true ? '' : 'border-2 border-[#ff6146] animate-[pulse_0.2s_ease-in-out_2] '} px-4 rounded-md outline-[#3f10082e] w-[300px]`} type="text" placeholder={correctName == false ?"Name already added": "Name your pizza" } />
                 <div className='flex justify-center items-center gap-3 bg-[#0000001c] p-2 rounded-md'>
                         <div className='px-4 font-bold text-[20px]'>£{customPrice}</div>
                         <button onClick={()=> {
                         sendCustomPizza()
-                        resetCustom()
                         }} className='bg-yellow-300 px-4 py-2 rounded-md font-bold'>Add to cart</button>
                 </div>
             </div>
