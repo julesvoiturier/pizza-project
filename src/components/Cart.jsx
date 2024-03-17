@@ -11,16 +11,16 @@ const Cart = () => {
     const dispatch = useDispatch()
 
     return (
-        <div className={`${openCart == true ? `w-[450px]` : `w-[0px] overflow-hidden` } transition-all fixed right-0 bottom-0 top-0 bg-[#150b0ae0] backdrop-blur-lg pt-[70px] z-10 overflow-hidden flex flex-col justify-between`}>
+        <div className={`${openCart == true ? `w-[450px] max-sm:w-[300px]` : `w-[0px] overflow-hidden` } transition-all fixed right-0 bottom-0 top-0 bg-[#eeebeb] backdrop-blur-lg pt-[70px] z-10 overflow-hidden flex flex-col justify-between`}>
             <div className='p-4'>
                 <div className='flex flex-col gap-4 rounded-md max-h-[550px] overflow-scroll'>
                     {
                         cart.length > 0 ? cart.map((item, key) => {
                             return(
-                                <div className='flex relative  h-auto items-center rounded-md group gap-4'>
-                                    <button onClick={()=> dispatch(removeAllFromCart({pizzaName: item.pizzaName, price: item.price, quantity:item.quantity}))} className='size-[25px] bg-[#2d100b] rounded-full absolute top-[-8px] left-[-8px] z-20 transition-all group-hover:visible hover:bg-[#ff6146] scale-[0%] group-hover:scale-[100%] text-white'></button>
+                                <div className='flex h-auto rounded-md group'>
+                                    <button onClick={()=> dispatch(removeAllFromCart({pizzaName: item.pizzaName, price: item.price, quantity:item.quantity}))} className=' rounded-md w-[0px] h-[30px] transition-all bg-[#ff6146] group-hover:visible group-hover:w-[30px] group-hover:mr-4 font-bold text-white'>X</button>
                                     <div className='w-full h-auto flex flex-col rounded-md overflow-hidden bg-slate-100'>
-                                        <div className='flex h-auto py-3 items-center justify-between px-4 bg-yellow-300'>
+                                        <div className='flex h-auto py-3 items-center justify-between px-4 text-white bg-[#2d100b]'>
                                             <div className='font-bold'>{item.pizzaName}</div>
                                             <div className='flex gap-2'>
                                                 <div className='font-bold'>£{item.price}</div>
@@ -41,16 +41,16 @@ const Cart = () => {
                                     </div>
                                 </div>
                             )
-                        }) : <div className='whitespace-nowrap text-white'>Your cart is empty ...</div>
+                        }) : <div className='whitespace-nowrap'>Your cart is empty ...</div>
                     }
                 </div>
                 <div className='w-full flex justify-end pt-4'>
-                    {cart.length > 0 ? <button onClick={()=> dispatch(emptyCart())} className='px-4 py-3 transition-all rounded-md text-white bg-[#ff6146] hover:text-white whitespace-nowrap'>empty cart</button> : null}
+                    {cart.length > 0 ? <button onClick={()=> dispatch(emptyCart())} className='px-4 py-3 transition-all rounded-md text-white bg-[#ff6146] font-bold hover:text-white whitespace-nowrap'>empty cart</button> : null}
                 </div>
             </div>
             
             <div className='flex flex-col gap-4 p-4'>
-                <div className=' h-[50px] w-full rounded-md px-4 flex items-center justify-between bg-slate-100 font-bold whitespace-nowrap'>Total price: <span className=''>£{total}</span></div>
+                <div className=' h-[50px] w-full rounded-md px-4 flex items-center justify-between bg-white font-bold whitespace-nowrap'>Total price: <span className=''>£{total}</span></div>
                 <div className=' text-white  font-bold h-[50px] w-full rounded-md flex justify-center items-center bg-[#ff6146]'>Checkout</div>
             </div>
         </div>

@@ -21,7 +21,7 @@ const PizzaCard = (props) => {
     }
 
     return (
-        <div className={`${openCart == true ? `pointer-events-none opacity-50` : ``} w-[30%] transition-all aspect-square bg-[#2d100b3c] hover:bg-[#2d100bb8] rounded-md overflow-hidden hover:translate-y-[-1%] group`}>
+        <div className={`${openCart == true ? `pointer-events-none opacity-50` : ``} w-[30%] max-md:w-[45%] max-sm:w-[100%] transition-all aspect-square bg-[#2d100b3c] hover:bg-[#2d100bb8] rounded-md overflow-hidden hover:translate-y-[-1%] group`}>
             <div className='h-full'>
                 <div className='bg-[#2d100b] transition-all h-[20%] px-6 flex justify-between items-center group-hover:bg-[#ff6146]'>
                     <div className='text-white text-[18px] font-bold'>{props.pizzaName}</div>
@@ -34,7 +34,7 @@ const PizzaCard = (props) => {
                                 {
                                     cart.length > 0 ? cart.map((item, key) => {
                                         return item.pizzaName == props.pizzaName ?
-                                        <div className={`size-[25px] bg-yellow-300 rounded-full font-medium absolute top-[-8px] left-[-8px] text-black text-[12px] flex justify-center items-center`}>{item.quantity }</div>
+                                        <div className={`size-[25px] bg-yellow-300 rounded-full font-medium absolute top-[-8px] right-[-8px] text-black text-[12px] flex justify-center items-center`}>{item.quantity }</div>
                                         : null;
                                     }) : null
                                 }
